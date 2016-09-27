@@ -28,7 +28,7 @@ else
 	echo "ERROR"
 fi
 
-echo $OS
+#echo $OS
 
 mkdir -p $HOME/local/src
 mkdir -p $HOME/local/DIR
