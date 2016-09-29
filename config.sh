@@ -16,12 +16,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-if [ "$(echo $* | grep -c '\-h')" -gt "0" ]
-then
-	echo "Help: blablablablablablabla"
-	exit 0
-fi
-
 #OS=''
 MODS="avispy roboview cmoc pyrovito vfl vfclik kbd-cart-cmd arcospyu"
 
@@ -39,6 +33,49 @@ MODS="avispy roboview cmoc pyrovito vfl vfclik kbd-cart-cmd arcospyu"
 
 mkdir -p $HOME/local/src
 mkdir -p $HOME/local/DIR
+
+
+if [ "$(echo $* | grep -c '\-h')" -gt "0" ]
+then
+    echo "Help: blablablablablablabla"
+    exit 0
+
+fi
+
+if [ "$(echo $* | grep -c '\--purge')" -gt "0" ]
+then
+    echo "Purge"
+    
+    for i in $MODS
+    do
+        #echo $i
+        echo "install $i"
+        if [ -e $HOME/local/DIR/$i ]
+        then
+            cd $HOME/local/src/$i
+	    make xstow_uninstall
+	    cd $HOME
+	    rm -rf $HOME/local/src/$i
+	    #exit 0
+        else
+	    echo "$i does not exist"
+        fi
+    done
+    
+    #robot_descriptions
+    echo "robot_descriptions"
+    if [ -e $HOME/local/src/robot_descriptions ]
+    then
+        echo 'removing robot_descriptions'
+	rm -rf $HOME/local/src/robot_descriptions
+    else
+	echo 'does not exist'
+
+    fi
+    
+    exit 0
+    
+fi
 
 for i in $MODS
 do
@@ -69,3 +106,4 @@ git clone https://github.com/arcoslab/robot_descriptions.git
 fi
 
 exit 0
+
