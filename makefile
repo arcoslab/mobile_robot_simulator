@@ -32,6 +32,13 @@ xstow_install: install
 xstow_uninstall:
 	cd ${PREFIX}/../ && xstow -D ${NAME} && rm -rf ${NAME}
 
+config:
+	bash config.sh
+
+purge:
+	bash config.sh --purge
+
+
 %.deb:
 	python setup.py --command-packages=stdeb.command bdist_deb
 
