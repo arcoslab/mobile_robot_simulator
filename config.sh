@@ -35,9 +35,9 @@ mkdir -p $HOME/local/src
 mkdir -p $HOME/local/DIR
 
 
-if [ "$(echo $* | grep -c '\-h')" -gt "0" ]
+if [ "$(echo $* | grep -c '\-h')" -gt "0" ] || [ "$(echo $* | grep -c '\--help')" -gt "0" ]
 then
-    echo "Help: blablablablablablabla"
+    echo -e "Usage: 	./config.sh\n	./config.sh [OPTIONS]\n\n	-h, --help	give this help list\n	--purge		delete all modules"
     exit 0
 
 fi

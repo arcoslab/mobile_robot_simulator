@@ -17,4 +17,16 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 This is a project to have a mobile robot simulator. It should be used with yarp and pyrovito.
 
-docuentation in https://wiki.arcoslab.eie.ucr.ac.cr/doku.php?id=tutorials:mobile_robot_simulator
+documentation in https://wiki.arcoslab.eie.ucr.ac.cr/doku.php?id=tutorials:mobile_robot_simulator
+
+[INSTALL]
+To install run these commands:
+	
+	$ ./config.sh 
+	$ make install
+	
+
+[UNINSTALL]
+	
+	$ ./config.sh --purge
+	$ cd .. && rm -rf ./mobile_robot_simulator
