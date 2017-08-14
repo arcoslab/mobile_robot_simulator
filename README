@@ -30,3 +30,8 @@ To install run these commands:
 	
 	$ ./config.sh --purge
 	$ cd .. && rm -rf ./mobile_robot_simulator
+
+Branches:
+
+ * master: main branch
+ * noyarp: remove YARP as a dependency by communicating processes using python Pipes.
