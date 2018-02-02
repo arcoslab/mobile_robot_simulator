@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Copyright (c) 2011 Autonomous Robots and Cognitive Systems Laboratory, Universidad de Costa Rica
+# Copyright (c) 2011 Autonomous Robots and Cognitive Systems Laboratory
 # Authors: Daniel Garcia Vaglio degv364@gmail.com
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,10 +16,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-import differential_robot, omnidirectional_robot, walker, ball_bot, ackerman_robot
+from .differential_robot import Differential_robot
+from .omnidirectional_robot import Omnidirectional_robot
+from .walker import Walker
+from .ball_bot import Ball_bot
+from .ackerman_robot import Ackerman_robot
 
-def main():
-    pass
-
-if __name__=="__main__":
-    main()
+__all__ = [
+    'Differential_robot', 'Omnidirectional_robot', 'Walker',
+    'Ball_bot', 'Ackerman_robot'
+]

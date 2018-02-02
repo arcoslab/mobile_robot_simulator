@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Copyright (c) 2011 Autonomous Robots and Cognitive Systems Laboratory, Universidad de Costa Rica
+# Copyright (c) 2011 Autonomous Robots and Cognitive Systems Laboratory
 # Authors: Daniel Garcia Vaglio degv364@gmail.com
 #
 # This program is free software: you can redistribute it and/or modify
@@ -17,13 +17,17 @@
 from distutils.core import setup
 
 
-setup(name='mobile_robot_simulator',
-      version='0.1',
-      description='Mobile Robot Simulator',
-      author='Daniel Garcia Vaglio',
-      author_email='degv364@gmail.com',
-      url='http://www.arcoslab.org/',
-      package_dir={'mobile_robot_simulator': ''},
-      packages=['mobile_robot_simulator', 'mobile_robot_simulator.robot_models', 'mobile_robot_simulator.tools', 'mobile_robot_simulator.vectorfield'],
-      scripts=['core.py','tools/goal_obstacle.py' ]
-     )
+setup(
+    name='mobile_robot_simulator',
+    version='0.1',
+    description='Mobile Robot Simulator',
+    author='Daniel Garcia Vaglio',
+    author_email='degv364@gmail.com',
+    url='http://www.arcoslab.org/',
+    package_dir={'mobile_robot_simulator': ''},
+    packages=[
+        'mobile_robot_simulator', 'mobile_robot_simulator.robot_models',
+        'mobile_robot_simulator.tools', 'mobile_robot_simulator.vectorfield'
+    ],
+    scripts=['core.py', 'tools/goal_obstacle.py']
+)

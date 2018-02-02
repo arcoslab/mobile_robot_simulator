@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Copyright (c) 2011 Autonomous Robots and Cognitive Systems Laboratory, Universidad de Costa Rica
+# Copyright (c) 2011 Autonomous Robots and Cognitive Systems Laboratory
 # Authors: Daniel Garcia Vaglio degv364@gmail.com
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,9 +16,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-import points
-def main():
-    pass
+from __future__ import absolute_import
 
-if __name__=="__main__":
-    main()
+
+from . import points
+
+__all__ = ['points']
