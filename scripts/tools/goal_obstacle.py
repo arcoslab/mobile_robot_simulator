@@ -146,8 +146,8 @@ class Control(Controlloop):
                 self.obstacle_vel_list[i][:2] += 0.6 * random(2) - array(
                     [0.3, 0.3])
                 if norm(self.obstacle_pose_list[i][:2, 3]) > 12:
-                    self.obstacle_vel_list[
-                        i][:2] += old_div(-self.obstacle_pose_list[i][:2, 3], 12.0)
+                    self.obstacle_vel_list[i][:2] += old_div(
+                        -self.obstacle_pose_list[i][:2, 3], 12.0)
 
         # send information throught yarp
         for i in range(self.robot_cant):

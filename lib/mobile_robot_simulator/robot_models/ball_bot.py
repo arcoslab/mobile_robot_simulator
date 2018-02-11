@@ -25,6 +25,8 @@
 
 from __future__ import print_function
 from builtins import object
+
+
 class Ball_bot(object):
     def __init__(self):
         print("not implemented")

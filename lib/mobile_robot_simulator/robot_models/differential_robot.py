@@ -32,7 +32,8 @@ class Differential_robot(object):
         self.robot_dim = [.5, 0.5, .3]
         self.robot_center = array([0., 0., 0])
         self.robot_planes = [
-            [(1., 0., 0), (old_div(self.robot_dim[0], 2.), 0., 0.)],  # (normal, point)
+            # normal point
+            [(1., 0., 0), (old_div(self.robot_dim[0], 2.), 0., 0.)],
             [(-1., 0., 0), (old_div(-self.robot_dim[0], 2.), 0., 0.)],
             [(0., 1., 0), (0., old_div(self.robot_dim[1], 2.), 0.)],
             [(0., -1., 0), (0., old_div(-self.robot_dim[1], 2.), 0.)],
@@ -59,7 +60,8 @@ class Differential_robot(object):
         self.robot_dim = robot_dim
         self.robot_center = robot_center
         self.robot_planes = [
-            [(1., 0., 0), (old_div(self.robot_dim[0], 2.), 0., 0.)],  # (normal, point)
+            # normal point
+            [(1., 0., 0), (old_div(self.robot_dim[0], 2.), 0., 0.)],
             [(-1., 0., 0), (old_div(-self.robot_dim[0], 2.), 0., 0.)],
             [(0., 1., 0), (0., old_div(self.robot_dim[1], 2.), 0.)],
             [(0., -1., 0), (0., old_div(-self.robot_dim[1], 2.), 0.)],
@@ -82,14 +84,16 @@ class Differential_robot(object):
     def wheel_velocity(self, descentralized_velocity, angle):
         # Compute wheel velocities from the required velocity of the
         # descentralized point, and the current angle of the robot.
-        right_wheel = old_div(((self.d * cos(angle) - 0.5 * self.b * sin(angle)
-                        ) * descentralized_velocity[0] +
-                       (self.d * sin(angle) + 0.5 * self.b * cos(angle)
-                        ) * descentralized_velocity[1]), (self.d * self.r))
-        left_wheel = old_div(((self.d * cos(angle) + 0.5 * self.b * sin(angle)
-                       ) * descentralized_velocity[0] +
-                      (self.d * sin(angle) - 0.5 * self.b * cos(angle)
-                       ) * descentralized_velocity[1]), (self.d * self.r))
+        right_wheel = old_div(((self.d * cos(angle) - 0.5 * self.b *
+                                sin(angle)) * descentralized_velocity[0] +
+                               (self.d * sin(angle) + 0.5 * self.b *
+                                cos(angle)) * descentralized_velocity[1]),
+                              (self.d * self.r))
+        left_wheel = old_div(((self.d * cos(angle) + 0.5 * self.b
+                               * sin(angle)) * descentralized_velocity[0] +
+                              (self.d * sin(angle) - 0.5 * self.b
+                               * cos(angle)) * descentralized_velocity[1]),
+                             (self.d * self.r))
 
         # Limit max velocities on each wheel
         if left_wheel > self.max_wheel_vel:
