@@ -16,9 +16,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import absolute_import
+import differential_robot
+import omnidirectional_robot
+import walker
+import ball_bot
+import ackerman_robot
 
-
-from . import points
-
-__all__ = ['points']
+__all__ = [
+    'differential_robot', 'omnidirectional_robot', 'walker',
+    'ball_bot', 'ackerman_robot'
+]
