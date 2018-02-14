@@ -17,7 +17,8 @@
 
 NAME=mobile_robot_simulator
 #NAME=cmoc
-PREFIX ?= ${HOME}/local/DIR/${NAME}
+#PREFIX ?= ${HOME}/local/lib/${NAME}
+PREFIX ?= ${HOME}/local/
 DEB_TARGET=python-mobile_robot_simulator_0.1-1_all.deb
 
 all:

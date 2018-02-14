@@ -27,7 +27,7 @@ from __future__ import print_function
 from builtins import object
 
 
-class Differential_robot(object):
+class Walker(object):
     def __init__(self):
         print("not implemented")
 

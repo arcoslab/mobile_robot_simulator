@@ -60,7 +60,8 @@ setup(
     version='0.1.1',
     package_dir={'mobile_robot_simulator': 'lib'},
     packages=find_packages('lib'),
-    scripts=['core.py', 'tools/goal_obstacle.py'],
+    scripts=['scripts/core.py',
+             'scripts/tools/goal_obstacle.py'],
 
     # Dependencies
     install_requires=find_requirements('requirements.txt'),

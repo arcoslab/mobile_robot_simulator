@@ -21,7 +21,6 @@
 # This is a program that will simulate a differential robot.
 
 # system
-from builtins import str
 from builtins import range
 import time
 # numpy
@@ -38,7 +37,8 @@ from arcospyu.robot_tools.robot_trans import homo_matrix
 from arcospyu.rawkey.rawkey import Raw_key, Keys
 # imports from this project
 from mobile_robot_simulator.vectorfield.points import vectorfield
-from mobile_robot_simulator.robot_models import Differential_robot
+from mobile_robot_simulator.robot_models.differential_robot import \
+    Differential_robot
 
 
 class Loop(Controlloop):
@@ -79,17 +79,17 @@ class Loop(Controlloop):
         for i in range(self.robot_cant):
             self.goal_in_port_list.append(
                 new_port(
-                    base_name + "/goal" + str(i) + ":in",
+                    base_name + "/goal" + i.__str__() + ":in",
                     "in",
-                    "/goal_obstacle/goal" + str(i) + ":out",
+                    "/goal_obstacle/goal" + i.__str__() + ":out",
                     timeout=1.))
         self.obstacle_in_port_list = []
         for i in range(self.obstacle_cant):
             self.obstacle_in_port_list.append(
                 new_port(
-                    base_name + "/obstacle" + str(i) + ":in",
+                    base_name + "/obstacle" + i.__str__() + ":in",
                     "in",
-                    "/goal_obstacle/obstacle" + str(i) + ":out",
+                    "/goal_obstacle/obstacle" + i.__str__() + ":out",
                     timeout=1.))
 
         self.last_time = time.time()

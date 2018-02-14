@@ -16,13 +16,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-import differential_robot
-import omnidirectional_robot
-import walker
-import ball_bot
-import ackerman_robot
+from .differential_robot import Differential_robot
+from .omnidirectional_robot import Omnidirectional_robot
+from .walker import Walker
+from .ball_bot import Ball_bot
+from .ackerman_robot import Ackerman_robot
 
 __all__ = [
-    'differential_robot', 'omnidirectional_robot', 'walker',
-    'ball_bot', 'ackerman_robot'
+    'Differential_robot', 'Omnidirectional_robot', 'Walker',
+    'Ball_bot', 'Ackerman_robot'
 ]

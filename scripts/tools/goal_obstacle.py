@@ -19,7 +19,6 @@
 
 # system
 from __future__ import division
-from builtins import str
 from builtins import range
 from past.utils import old_div
 import time
@@ -46,9 +45,7 @@ class Control(Controlloop):
     def set_params(self, params):
         # General initialization, takes the dictionary params and
         # puts everything in variables of the class
-        vars(self).update(
-            params
-        )
+        vars(self).update(params)
         self.raw_key = Raw_key()
         base_name = "/goal_obstacle"
 
@@ -59,9 +56,9 @@ class Control(Controlloop):
         for i in range(self.robot_cant):
             self.goal_out_port_list.append(
                 new_port(
-                    base_name + "/goal" + str(i) + ":out",
+                    base_name + "/goal" + i.__str__() + ":out",
                     "out",
-                    "/differential_robot/goal" + str(i) + ":in",
+                    "/differential_robot/goal" + i.__str__() + ":in",
                     timeout=2))
             self.goal_pose_list[i] = identity(4)
             self.goal_pose_list[i][:3, 3] = array([0.1, i, 0.])
@@ -74,9 +71,9 @@ class Control(Controlloop):
         for i in range(self.obstacle_cant):
             self.obstacle_out_port_list.append(
                 new_port(
-                    base_name + "/obstacle" + str(i) + ":out",
+                    base_name + "/obstacle" + i.__str__() + ":out",
                     "out",
-                    "/differential_robot/obstacle" + str(i) + ":in",
+                    "/differential_robot/obstacle" + i.__str__() + ":in",
                     timeout=2))
             self.obstacle_pose_list[i] = identity(4)
             self.obstacle_vel_list[i] = array([0., 0., 0., 0., 0., 0.])
