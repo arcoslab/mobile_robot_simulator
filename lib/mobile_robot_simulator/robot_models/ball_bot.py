@@ -24,8 +24,6 @@
 # of a differential robot. Also computes the velocities that are necesary
 # to work with the simulator core
 
-
-from __future__ import print_function
 from builtins import object
 
 
@@ -39,10 +37,10 @@ class Ball_bot(object):
     """
 
     def __init__(self):
-        print("not implemented")
+        raise NotImplementedError()
 
     def set_params(self, params):
-        print("not implemented")
+        raise NotImplementedError()
 
     def central_velocity(self, req_velocity, angle):
-        return req_velocity
+        raise NotImplementedError()

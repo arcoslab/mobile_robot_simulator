@@ -17,7 +17,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import print_function
 from builtins import object
 
 
@@ -29,10 +28,10 @@ class Omnidirectional_robot(object):
     that are required to work with the simulator core
     """
     def __init__(self):
-        print("not implemented")
+        raise NotImplementedError()
 
     def set_params(self, params):
-        print("not implemented")
+        raise NotImplementedError()
 
     def central_velocity(self, req_velocity, angle):
-        return req_velocity
+        raise NotImplementedError()
