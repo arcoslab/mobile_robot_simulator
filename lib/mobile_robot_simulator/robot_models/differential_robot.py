@@ -19,7 +19,6 @@
 
 from __future__ import division
 from builtins import object
-from past.utils import old_div
 from numpy import array, cos, sin
 
 
@@ -36,23 +35,23 @@ class Differential_robot(object):
         self.robot_center = array([0., 0., 0])
         self.robot_planes = [
             # normal point
-            [(1., 0., 0), (old_div(self.robot_dim[0], 2.), 0., 0.)],
-            [(-1., 0., 0), (old_div(-self.robot_dim[0], 2.), 0., 0.)],
-            [(0., 1., 0), (0., old_div(self.robot_dim[1], 2.), 0.)],
-            [(0., -1., 0), (0., old_div(-self.robot_dim[1], 2.), 0.)],
-            [(0., 0., 1), (0., 0., old_div(self.robot_dim[2], 2.))],
-            [(0., 0., -1), (0., 0., old_div(-self.robot_dim[2], 2.))]
+            [(1., 0., 0), (self.robot_dim[0] / 2., 0., 0.)],
+            [(-1., 0., 0), (-self.robot_dim[0] / 2., 0., 0.)],
+            [(0., 1., 0), (0., self.robot_dim[1] / 2., 0.)],
+            [(0., -1., 0), (0., -self.robot_dim[1] / 2., 0.)],
+            [(0., 0., 1), (0., 0., self.robot_dim[2] / 2.)],
+            [(0., 0., -1), (0., 0., -self.robot_dim[2] / 2.)]
         ]
 
         self.surface_object_face = 5
         self.r = 1  # Wheel radius
         self.b = self.robot_dim[0]  # Distance between wheels
-        self.d = old_div(self.robot_dim[
-            1], 2.0)  # Distance between robot center and descentralized point
+        self.d = (self.robot_dim[
+            1] / 2.0)  # Distance between robot center and descentralized point
 
         # Inertial constants
         self.weight_force = 2.
-        self.object_mass = old_div(self.weight_force, 9.8)
+        self.object_mass = self.weight_force / 9.8
         self.object_rotational_inertia = self.object_mass * (
             self.robot_dim[0]**2 + self.robot_dim[1]**2) / 12.
         self.max_wheel_vel = 100
@@ -65,12 +64,12 @@ class Differential_robot(object):
         self.robot_center = robot_center
         self.robot_planes = [
             # normal point
-            [(1., 0., 0), (old_div(self.robot_dim[0], 2.), 0., 0.)],
-            [(-1., 0., 0), (old_div(-self.robot_dim[0], 2.), 0., 0.)],
-            [(0., 1., 0), (0., old_div(self.robot_dim[1], 2.), 0.)],
-            [(0., -1., 0), (0., old_div(-self.robot_dim[1], 2.), 0.)],
-            [(0., 0., 1), (0., 0., old_div(self.robot_dim[2], 2.))],
-            [(0., 0., -1), (0., 0., old_div(-self.robot_dim[2], 2.))]
+            [(1., 0., 0), (self.robot_dim[0] / 2., 0., 0.)],
+            [(-1., 0., 0), (-self.robot_dim[0] / 2., 0., 0.)],
+            [(0., 1., 0), (0., self.robot_dim[1] / 2., 0.)],
+            [(0., -1., 0), (0., -self.robot_dim[1] / 2., 0.)],
+            [(0., 0., 1), (0., 0., self.robot_dim[2] / 2.)],
+            [(0., 0., -1), (0., 0., -self.robot_dim[2] / 2.)]
         ]
 
         self.surface_object_face = 5
@@ -80,7 +79,7 @@ class Differential_robot(object):
 
         # Inertial constants
         self.weight_force = weight
-        self.object_mass = old_div(self.weight_force, 9.8)
+        self.object_mass = self.weight_force / 9.8
         self.object_rotational_inertia = self.object_mass * (
             self.robot_dim[0]**2 + self.robot_dim[1]**2) / 12.
         self.max_wheel_vel = max_vel
@@ -93,16 +92,16 @@ class Differential_robot(object):
         at the descentralized point
         """
 
-        right_wheel = old_div(((self.d * cos(angle) - 0.5 * self.b *
-                                sin(angle)) * descentralized_velocity[0] +
-                               (self.d * sin(angle) + 0.5 * self.b *
-                                cos(angle)) * descentralized_velocity[1]),
-                              (self.d * self.r))
-        left_wheel = old_div(((self.d * cos(angle) + 0.5 * self.b
-                               * sin(angle)) * descentralized_velocity[0] +
-                              (self.d * sin(angle) - 0.5 * self.b
-                               * cos(angle)) * descentralized_velocity[1]),
-                             (self.d * self.r))
+        right_wheel = (((self.d * cos(angle) - 0.5 * self.b *
+                         sin(angle)) * descentralized_velocity[0] +
+                        (self.d * sin(angle) + 0.5 * self.b *
+                         cos(angle)) * descentralized_velocity[1]) /
+                       (self.d * self.r))
+        left_wheel = (((self.d * cos(angle) + 0.5 * self.b
+                        * sin(angle)) * descentralized_velocity[0] +
+                       (self.d * sin(angle) - 0.5 * self.b
+                        * cos(angle)) * descentralized_velocity[1]) /
+                      (self.d * self.r))
 
         # Limit max velocities on each wheel
         if left_wheel > self.max_wheel_vel:
@@ -120,9 +119,9 @@ class Differential_robot(object):
 
         [phi_l, phi_r] = self.wheel_velocity(descentralized_point_vel, angle)
         central_velocity = array([0., 0., 0., 0., 0., 0.])
-        central_velocity[0] = (old_div((self.r * cos(angle)), self.b)) * (
+        central_velocity[0] = ((self.r * cos(angle)) / self.b) * (
             phi_r + phi_l)
-        central_velocity[1] = (old_div((self.r * sin(angle)), self.b)) * (
+        central_velocity[1] = ((self.r * sin(angle)) / self.b) * (
             phi_r + phi_l)
-        central_velocity[5] = (old_div(self.r, self.b)) * (phi_r - phi_l)
+        central_velocity[5] = (self.r / self.b) * (phi_r - phi_l)
         return central_velocity
