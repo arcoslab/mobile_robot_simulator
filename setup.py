@@ -1,5 +1,8 @@
 #!/usr/bin/env python
-# Copyright (c) 2011 Autonomous Robots and Cognitive Systems Laboratory
+# -*- coding: utf-8 -*-
+
+# Copyright (c) 2016-2018 Autonomous Robots and Cognitive Systems Laboratory
+# Universidad de Costa Rica
 # Authors: Daniel Garcia Vaglio degv364@gmail.com
 #
 # This program is free software: you can redistribute it and/or modify
@@ -57,8 +60,8 @@ def find_requirements(filename):
 
 setup(
     name='mobile_robot_simulator',
-    version='0.1.1',
-    package_dir={'mobile_robot_simulator': 'lib'},
+    version=find_version('lib/mobile_robot_simulator/__init__.py'),
+    package_dir={'': 'lib'},
     packages=find_packages('lib'),
     scripts=['scripts/core.py',
              'scripts/tools/goal_obstacle.py'],
