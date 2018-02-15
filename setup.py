@@ -67,7 +67,7 @@ setup(
              'scripts/tools/goal_obstacle.py'],
 
     # Dependencies
-    install_requires=find_requirements('requirements.txt'),
+    install_requires=find_requirements('requirements.dev.txt'),
 
     # Metadata
     author='Daniel Garcia Vaglio',
