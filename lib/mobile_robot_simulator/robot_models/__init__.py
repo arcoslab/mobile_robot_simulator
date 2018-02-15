@@ -1,6 +1,7 @@
-#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
-# Copyright (c) 2011 Autonomous Robots and Cognitive Systems Laboratory
+# Copyright (c) 2016-2018 Autonomous Robots and Cognitive Systems Laboratory
+# Universidad de Costa Rica
 # Authors: Daniel Garcia Vaglio degv364@gmail.com
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,6 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+from __future__ import absolute_import
 from .differential_robot import Differential_robot
 from .omnidirectional_robot import Omnidirectional_robot
 from .walker import Walker
