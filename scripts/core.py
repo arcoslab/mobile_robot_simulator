@@ -20,8 +20,6 @@
 # This program was developed by Daniel Garcia Vaglio (degv364@gmail.com).
 # Inspired from a program by Federico Ruiz.
 
-# This is a program that will simulate a differential robot.
-
 # system
 from builtins import range
 import time
@@ -41,6 +39,8 @@ from arcospyu.rawkey.rawkey import Raw_key, Keys
 from mobile_robot_simulator.vectorfield.points import vectorfield
 from mobile_robot_simulator.robot_models.differential_robot import \
     Differential_robot
+
+""" This is a program that will simulate a differential robot."""
 
 
 class Loop(Controlloop):

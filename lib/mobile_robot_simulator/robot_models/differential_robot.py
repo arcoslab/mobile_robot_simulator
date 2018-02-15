@@ -17,11 +17,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-# Differential Robot Class.
-# This is a simple class that stores the parameters for a kinematic model
-# of a differential robot. Also computes the velocities that are necesary
-# to work with the simulator core
-
 from __future__ import division
 from builtins import object
 from past.utils import old_div
@@ -29,6 +24,12 @@ from numpy import array, cos, sin
 
 
 class Differential_robot(object):
+    """ Differential Robot class
+
+    This is a simple class that stores the parameters for a kinematic model
+    of a differential robot. Also computes the velocities that are necesary
+    to work with the simulator core
+    """
     def __init__(self):
         # dimensions
         self.robot_dim = [.5, 0.5, .3]
@@ -58,7 +59,8 @@ class Differential_robot(object):
 
     def set_params(self, robot_dim, robot_center, wheel_radius, wheel_distance,
                    center_distance, weight, max_vel):
-        # set the parameters on a robot that was already initialized
+        """ Set the parameters on a robot that was already initialized"""
+
         self.robot_dim = robot_dim
         self.robot_center = robot_center
         self.robot_planes = [
@@ -84,8 +86,13 @@ class Differential_robot(object):
         self.max_wheel_vel = max_vel
 
     def wheel_velocity(self, descentralized_velocity, angle):
-        # Compute wheel velocities from the required velocity of the
-        # descentralized point, and the current angle of the robot.
+        """ Compute wheel velocities
+
+        Using the kinematic model of a differential robot, calculate the
+        required rotational velocities of the wheels to get a certain velocity
+        at the descentralized point
+        """
+
         right_wheel = old_div(((self.d * cos(angle) - 0.5 * self.b *
                                 sin(angle)) * descentralized_velocity[0] +
                                (self.d * sin(angle) + 0.5 * self.b *
@@ -105,8 +112,12 @@ class Differential_robot(object):
         return [left_wheel, right_wheel]
 
     def central_velocity(self, descentralized_point_vel, angle):
-        # Compute the velocity at the center of the robot, by knowing the
-        # required velocity and current angle
+        """ Compute the robot's velocity at the geometric center
+
+        Compute the velocity at the center of the robot, by knowing the
+        required velocity and current angle
+        """
+
         [phi_l, phi_r] = self.wheel_velocity(descentralized_point_vel, angle)
         central_velocity = array([0., 0., 0., 0., 0., 0.])
         central_velocity[0] = (old_div((self.r * cos(angle)), self.b)) * (

@@ -18,8 +18,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-# handles obstacles and goals for basic simulations
-
 # system
 from __future__ import division
 from builtins import range
@@ -42,6 +40,8 @@ from arcospyu.kdl_helpers import my_adddelta
 # press f for random obstacle movement
 # use arrows to control goals
 # use wasd to control obstacles
+
+""" Handles obtacles and goals for basic simulations"""
 
 
 class Control(Controlloop):

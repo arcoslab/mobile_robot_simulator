@@ -30,6 +30,14 @@ from builtins import object
 
 
 class Ball_bot(object):
+
+    """ Ball bot model class
+
+    Not implemented yet. This is a simle class that stores the parameters for
+    a kinematic model of a ball bot. Also computes the velocities that are
+    required to work with the simulator core
+    """
+
     def __init__(self):
         print("not implemented")
 

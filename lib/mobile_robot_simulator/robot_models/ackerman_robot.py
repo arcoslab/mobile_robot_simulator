@@ -17,19 +17,17 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-# Ackerman robot Class.
-
-# Not implemented yet
-# This is a simple class that stores the parameters for a kinematic model
-# of a differential robot. Also computes the velocities that are necesary
-# to work with the simulator core
-
-
 from __future__ import print_function
 from builtins import object
 
 
 class Ackerman_robot(object):
+    """ Ackerman model class
+
+    Not implemented yet. This is a simle class that stores the parameters for
+    a kinematic model of an Ackerman. Also computes the velocities that are
+    required to work with the simulator core
+    """
     def __init__(self):
         print("not implemented")
 
