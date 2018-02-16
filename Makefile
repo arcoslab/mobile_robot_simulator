@@ -17,10 +17,8 @@
 
 
 NAME=mobile_robot_simulator
-#NAME=cmoc
-#PREFIX ?= ${HOME}/local/lib/${NAME}
+
 PREFIX ?= ${HOME}/local/
-DEB_TARGET=python-mobile_robot_simulator_0.1-1_all.deb
 
 all:
 	echo "Does nothing, try make install"
@@ -28,26 +26,12 @@ all:
 install:
 	python setup.py install --prefix=${PREFIX}
 
-xstow_install: install
-	cd ${PREFIX}/../ && xstow ${NAME}
-
-xstow_uninstall:
-	cd ${PREFIX}/../ && xstow -D ${NAME} && rm -rf ${NAME}
-
 config:
-	bash config.sh
+	bash scripts/config.sh
 
 purge:
-	bash config.sh --purge
+	bash scripts/config.sh --purge
 
-
-%.deb:
-	python setup.py --command-packages=stdeb.command bdist_deb
-
-deb: deb_dist/${DEB_TARGET}
-
-deb_install: deb_dist/${DEB_TARGET}
-	cd deb_dist && sudo dpkg -i *.deb
 
 clean:
 	python setup.py clean
