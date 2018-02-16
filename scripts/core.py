@@ -21,6 +21,7 @@
 # Inspired from a program by Federico Ruiz.
 
 # system
+from __future__ import division
 from builtins import range
 import time
 # numpy

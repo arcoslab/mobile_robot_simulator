@@ -21,7 +21,6 @@
 # system
 from __future__ import division
 from builtins import range
-from past.utils import old_div
 import time
 # numpy
 from numpy import array, identity
@@ -146,8 +145,8 @@ class Control(Controlloop):
                 self.obstacle_vel_list[i][:2] += 0.6 * random(2) - array(
                     [0.3, 0.3])
                 if norm(self.obstacle_pose_list[i][:2, 3]) > 12:
-                    self.obstacle_vel_list[i][:2] += old_div(
-                        -self.obstacle_pose_list[i][:2, 3], 12.0)
+                    self.obstacle_vel_list[i][:2] += (
+                        -self.obstacle_pose_list[i][:2, 3] / 12.0)
 
         # send information throught yarp
         for i in range(self.robot_cant):

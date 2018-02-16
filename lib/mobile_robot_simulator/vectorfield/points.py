@@ -20,6 +20,7 @@
 # This script takes the position of the goal, and the position of the
 # obstacles and computes the direction a robot in a particular point needs.
 
+from __future__ import division
 from builtins import range
 from numpy import array
 from numpy.linalg import norm
