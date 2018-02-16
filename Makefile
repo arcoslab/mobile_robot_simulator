@@ -1,4 +1,5 @@
-# Copyright (c) 2011 Autonomous Robots and Cognitive Systems Laboratory, Universidad de Costa Rica
+# Copyright (c) 2016-2018 Autonomous Robots and Cognitive Systems Laboratory,
+# Universidad de Costa Rica
 # Authors: Daniel Garcia Vaglio degv364@gmail.com
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,9 +17,8 @@
 
 
 NAME=mobile_robot_simulator
-#NAME=cmoc
-PREFIX ?= ${HOME}/local/DIR/${NAME}
-DEB_TARGET=python-mobile_robot_simulator_0.1-1_all.deb
+
+PREFIX ?= ${HOME}/local/
 
 all:
 	echo "Does nothing, try make install"
@@ -26,26 +26,12 @@ all:
 install:
 	python setup.py install --prefix=${PREFIX}
 
-xstow_install: install
-	cd ${PREFIX}/../ && xstow ${NAME}
-
-xstow_uninstall:
-	cd ${PREFIX}/../ && xstow -D ${NAME} && rm -rf ${NAME}
-
 config:
-	bash config.sh
+	bash scripts/config.sh
 
 purge:
-	bash config.sh --purge
+	bash scripts/config.sh --purge
 
-
-%.deb:
-	python setup.py --command-packages=stdeb.command bdist_deb
-
-deb: deb_dist/${DEB_TARGET}
-
-deb_install: deb_dist/${DEB_TARGET}
-	cd deb_dist && sudo dpkg -i *.deb
 
 clean:
 	python setup.py clean

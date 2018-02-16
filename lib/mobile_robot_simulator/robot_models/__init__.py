@@ -1,5 +1,7 @@
-#!/usr/bin/env python
-# Copyright (c) 2011 Autonomous Robots and Cognitive Systems Laboratory, Universidad de Costa Rica
+# -*- coding: utf-8 -*-
+
+# Copyright (c) 2016-2018 Autonomous Robots and Cognitive Systems Laboratory
+# Universidad de Costa Rica
 # Authors: Daniel Garcia Vaglio degv364@gmail.com
 #
 # This program is free software: you can redistribute it and/or modify
@@ -15,22 +17,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#Ball_bot Class.
+from __future__ import absolute_import
+from .differential_robot import Differential_robot
+from .omnidirectional_robot import Omnidirectional_robot
+from .walker import Walker
+from .ball_bot import Ball_bot
+from .ackerman_robot import Ackerman_robot
 
-#Not implemented yet
-#This is a simple class that stores the parameters for a kinematic model of a differential robot. Also
-#computes the velocities that are necesary to work with the simulator core
-
-from numpy import array,identity, cos, sin
-
-
-class Differential_robot(object):
-    def __init__(self):
-        print "not implemented"
-        
-    def set_params(self, params):
-        print "not implemented"
-        
-    def central_velocity(self, req_velocity, angle):
-        return req_velocity
-               
+__all__ = [
+    'Differential_robot', 'Omnidirectional_robot', 'Walker',
+    'Ball_bot', 'Ackerman_robot'
+]

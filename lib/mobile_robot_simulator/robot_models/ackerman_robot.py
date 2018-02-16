@@ -1,6 +1,7 @@
-#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
-# Copyright (c) 2011 Autonomous Robots and Cognitive Systems Laboratory, Universidad de Costa Rica
+# Copyright (c) 2016-2018 Autonomous Robots and Cognitive Systems Laboratory
+# Universidad de Costa Rica
 # Authors: Daniel Garcia Vaglio degv364@gmail.com
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,9 +17,21 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-import points
-def main():
-    pass
+from builtins import object
 
-if __name__=="__main__":
-    main()
+
+class Ackerman_robot(object):
+    """ Ackerman model class
+
+    Not implemented yet. This is a simle class that stores the parameters for
+    a kinematic model of an Ackerman. Also computes the velocities that are
+    required to work with the simulator core
+    """
+    def __init__(self):
+        raise NotImplementedError()
+
+    def set_params(self, params):
+        raise NotImplementedError()
+
+    def central_velocity(self, req_velocity, angle):
+        raise NotImplementedError()

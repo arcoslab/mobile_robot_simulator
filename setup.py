@@ -1,5 +1,8 @@
 #!/usr/bin/env python
-# Copyright (c) 2011 Autonomous Robots and Cognitive Systems Laboratory, Universidad de Costa Rica
+# -*- coding: utf-8 -*-
+
+# Copyright (c) 2016-2018 Autonomous Robots and Cognitive Systems Laboratory
+# Universidad de Costa Rica
 # Authors: Daniel Garcia Vaglio degv364@gmail.com
 #
 # This program is free software: you can redistribute it and/or modify
@@ -14,16 +17,71 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
-from distutils.core import setup
+
+from setuptools import setup, find_packages
 
 
-setup(name='mobile_robot_simulator',
-      version='0.1',
-      description='Mobile Robot Simulator',
-      author='Daniel Garcia Vaglio',
-      author_email='degv364@gmail.com',
-      url='http://www.arcoslab.org/',
-      package_dir={'mobile_robot_simulator': ''},
-      packages=['mobile_robot_simulator', 'mobile_robot_simulator.robot_models', 'mobile_robot_simulator.tools', 'mobile_robot_simulator.vectorfield'],
-      scripts=['core.py','tools/goal_obstacle.py' ]
-     )
+def read(filename):
+    """
+    Read a file relative to setup.py location.
+    """
+    import os
+    here = os.path.dirname(os.path.abspath(__file__))
+    with open(os.path.join(here, filename)) as fd:
+        return fd.read()
+
+
+def find_version(filename):
+    """
+    Find package version in file.
+    """
+    import re
+    content = read(filename)
+    version_match = re.search(
+        r"^__version__ = ['\"]([^'\"]*)['\"]", content, re.M)
+    if version_match:
+        return version_match.group(1)
+    raise RuntimeError('Unable to find version string.')
+
+
+def find_requirements(filename):
+    """
+    Find requirements in file.
+    """
+    import string
+    content = read(filename)
+    requirements = []
+    for line in content.splitlines():
+        line = line.strip()
+        if line and line[:1] in string.ascii_letters:
+            requirements.append(line)
+    return requirements
+
+
+setup(
+    name='mobile_robot_simulator',
+    version=find_version('lib/mobile_robot_simulator/__init__.py'),
+    package_dir={'': 'lib'},
+    packages=find_packages('lib'),
+    scripts=['scripts/core.py',
+             'scripts/tools/goal_obstacle.py'],
+
+    # Dependencies
+    install_requires=find_requirements('requirements.dev.txt'),
+
+    # Metadata
+    author='Daniel Garcia Vaglio',
+    author_email='degv364@gmail.com',
+    description='Mobile Robot Simulator',
+    url='http://www.arcoslab.org/',
+    classifiers=[
+        'Development Status :: 3 - Alpha',
+        'Intended Audience :: Developers',
+        'License :: GNU GPL v3',
+        'Natural Language :: English',
+        'Operating System :: POSIX :: Linux',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.4',
+    ])
