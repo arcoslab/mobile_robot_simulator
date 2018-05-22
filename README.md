@@ -20,13 +20,6 @@ This is a project to have a mobile robot simulator. It should be used with yarp 
 documentation in https://wiki.arcoslab.eie.ucr.ac.cr/doku.php?id=tutorials:mobile_robot_simulator
 
 [INSTALL]
-To install run these commands:
+To install run these command:
 	
-	$ ./config.sh 
 	$ make install
-	
-
-[UNINSTALL]
-	
-	$ ./config.sh --purge
-	$ cd .. && rm -rf ./mobile_robot_simulator
