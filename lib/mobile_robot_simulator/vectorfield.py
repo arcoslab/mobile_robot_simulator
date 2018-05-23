@@ -30,7 +30,7 @@ class VectorFieldType(Enum):
     LINE = 1
 
 
-def _point_vector_field(entity_pos, obstacle_pos, obstacle_constant=1):
+def _point_vector_field(entity_pose, obstacle_pose, obstacle_constant=1):
     """
     Compute the 'force' that entity feels because of punctual obstacle
 
@@ -41,12 +41,13 @@ def _point_vector_field(entity_pos, obstacle_pos, obstacle_constant=1):
     :returns: 3D vector with contribution of obstacle to vectorfield
     """
 
-    distance = norm(entity_pos - obstacle_pos)
-    force = obstacle_constant * (entity_pos - obstacle_pos) / (distance**3)
+    distance = norm(entity_pose[:3, 3] - obstacle_pose[:3, 3])
+    force = (obstacle_constant * (entity_pose[:3, 3] - obstacle_pose[:3, 3]) /
+             (distance**3))
     return force
 
 
-def _line_vector_field(entity_pos, line_vertices, obstacle_constant=1):
+def _line_vector_field(entity_pose, line_vertices, obstacle_constant=1):
     """
     Compute the 'force' that entity feels because of lineal obstacle
 
@@ -57,8 +58,8 @@ def _line_vector_field(entity_pos, line_vertices, obstacle_constant=1):
     :returns: 3D vector with contribution of obstacle to vectorfield
     """
 
-    entity_rel = entity_pos - line_vertices[0]
-    line_rel = line_vertices[1] - line_vertices[0]
+    entity_rel = entity_pose[:3, 3] - line_vertices[0][:3, 3]
+    line_rel = line_vertices[1][:3, 3] - line_vertices[0][:3, 3]
     proyection = ((dot(line_rel, entity_rel) /
                    (norm(entity_rel) * norm(line_rel))) * line_rel)
 
@@ -73,7 +74,7 @@ def _line_vector_field(entity_pos, line_vertices, obstacle_constant=1):
     return force
 
 
-def _multiple_vector_field(entity_pos, obstacle_list, obstacle_constants,
+def _multiple_vector_field(entity_pose, obstacle_list, obstacle_constants,
                            vector_field_type):
 
     vf_functions = {
@@ -92,20 +93,20 @@ def _multiple_vector_field(entity_pos, obstacle_list, obstacle_constants,
         if obstacle_constants is not None:
             force = force + sum(
                 map(vf_functions[vector_field_type],
-                    [entity_pos] * len(obstacle_list), obstacle_list,
+                    [entity_pose] * len(obstacle_list), obstacle_list,
                     obstacle_constants))
         else:
             force = force + sum(
                 map(vf_functions[vector_field_type],
-                    [entity_pos] * len(obstacle_list), obstacle_list))
+                    [entity_pose] * len(obstacle_list), obstacle_list))
 
     return force
 
 
 def vector_field(dt,
-                 entity_pos,
+                 entity_pose,
                  entity_vel,
-                 goal_pos,
+                 goal_pose,
                  point_obstacle_list=None,
                  line_obstacle_list=None,
                  point_obstacle_constants=None,
@@ -130,21 +131,22 @@ def vector_field(dt,
     """
 
     # Stop when entity is very close to the goal
-    if norm(entity_pos - goal_pos) < allowed_error:
+    if norm(entity_pose[:3, 3] - goal_pose[:3, 3]) < allowed_error:
         return array([0, 0, 0])
 
     force = array[0, 0, 0]
     # Point obstacles contribution
-    force = force + _multiple_vector_field(entity_pos, point_obstacle_list,
+    force = force + _multiple_vector_field(entity_pose, point_obstacle_list,
                                            point_obstacle_constants,
                                            VectorFieldType.POINT)
     # Line obstacles contribution
-    force = force + _multiple_vector_field(entity_pos, line_obstacle_list,
+    force = force + _multiple_vector_field(entity_pose, line_obstacle_list,
                                            line_obstacle_constants,
                                            VectorFieldType.LINE)
     # Goal contribution
-    force = force + goal_constant * (goal_pos - entity_pos)
+    force = force + goal_constant * (goal_pose[:3, 3] - entity_pose[:3, 3])
 
     velocity = entity_vel + force * dt - (damp_constant * entity_vel)
 
-    return velocity
+    # Add rotational null velocity before returning
+    return array([velocity[0], velocity[1], velocity[2], 0, 0, 0])
